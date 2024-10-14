@@ -225,6 +225,22 @@ contract D223Token {
 
     // ERC-20 functions for backwards compatibility.
 
+    // Security warning!
+
+    // ERC-20 transferFrom function does not invoke a `tokenReceived` function in the
+    // recipient smart-contract. Therefore error handling is not possible
+    // and a user can directly deposit tokens to any contract bypassing safety checks
+    // or token reception handlers which can result in a loss of funds.
+    // This functions are only supported for backwards compatibility reasons
+    // and as a last resort when it may be necessary to forcefully transfer tokens
+    // to some smart-contract which is not explicitly compatible with the ERC-223 standard.
+    //
+    // This is not a default method of depsoiting tokens to smart-contracts.
+    // `trasnfer` function must be used to deposit tokens to smart-contracts
+    // if the recipient supports ERC-223 depositing pattern.
+    //
+    // `approve` & `transferFrom` pattern must be avoided whenever possible.
+
     function allowance(address _owner, address spender) public view virtual returns (uint256) {
         return allowances[_owner][spender];
     }
