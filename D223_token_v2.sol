@@ -188,10 +188,11 @@ contract D223Token {
      * @param _value Amount of tokens that will be transferred.
      * @param _data  Transaction metadata.
      */
-    function transfer(address _to, uint _value, bytes calldata _data) public returns (bool success)
+    function transfer(address _to, uint _value, bytes calldata _data) public payable returns (bool success)
     {
         // Standard function transfer similar to ERC20 transfer with no _data .
-        // Added due to backwards compatibility reasons .
+        // Added due to backwards compatibility reasons.
+        if(msg.value > 0) payable(_to).transfer(msg.value);
         balances[msg.sender] = balances[msg.sender] - _value;
         balances[_to] = balances[_to] + _value;
         if(Address.isContract(_to)) {
@@ -211,8 +212,9 @@ contract D223Token {
      * @param _to    Receiver address.
      * @param _value Amount of tokens that will be transferred.
      */
-    function transfer(address _to, uint _value) public returns (bool success)
+    function transfer(address _to, uint _value) public payable returns (bool success)
     {
+        if(msg.value > 0) payable(_to).transfer(msg.value);
         bytes memory _empty = hex"00000000";
         balances[msg.sender] = balances[msg.sender] - _value;
         balances[_to] = balances[_to] + _value;
