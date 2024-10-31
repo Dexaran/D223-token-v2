@@ -272,6 +272,14 @@ contract D223Token {
         return true;
     }
 
+    // ERC-20 standard contains a security flaw described here: https://medium.com/dex223/known-problems-of-erc20-token-standard-e98887b9532c
+    // ERC-20 tokens do not invoke any callback function upon being deposited to a smart-contract via `transfer` function,
+    // therefore it's impossible to handle errors and prevent users from sending tokens to smart-contracts which are not designed to receive them.
+    // As of 2024 $83,000,000 worth of ERC-20 tokens were lost due to this flaw: https://dexaran.github.io/erc20-losses/
+    // In order to mitigate this issue we are allowing the owner to extract the tokens.
+    // You can contact the owner of the contract dexaran820@gmail.com / dexaran@ethereumclassic.org 
+    // if you have accidentally deposited tokens to this contract.
+
     function rescueERC20(address _token, uint256 _value) external
     {
         require(msg.sender == owner);
@@ -285,10 +293,6 @@ contract D223Token {
     // and therefore tokens can be transferred directly to smart-contract address
     // which is not designed to receive them and instead of resulting in an error
     // it would result in a loss of tokens for the sender.
-
-    // Problem description: https://dexaran820.medium.com/known-problems-of-erc20-token-standard-e98887b9532c
-
-    // $83,000,000 worth of funds were lost on Ethereum ecosystem due to this problem since 2017: https://dexaran.github.io/erc20-losses/
 
     function newOwner(address _owner) external
     {
