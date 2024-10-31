@@ -2,6 +2,7 @@
 
 // Contracts are written by @Dexaran (twitter.com/Dexaran github.com/Dexaran)
 // Read more about ERC-223 standard here: dexaran.github.io/erc223
+// ERC-223: https://eips.ethereum.org/EIPS/eip-223 & https://github.com/ethereum/eips/issues/223
 
 // D223 is a token of Dex223.io exchange.
 
