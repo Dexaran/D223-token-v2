@@ -42,7 +42,7 @@ abstract contract IERC223 {
 contract D223Upgrading
 {
     address public d223_old = 0xcCe968120e6Ded56F32fbfe5A2Ec06CBF1e7c8ED; // Address on Ethereum mainnet.
-    address public d223_new = 0x0908078da2935a14bc7a17770292818c85b580dd; // New address of D223 on ETH mainnet.
+    address public d223_new = 0x0908078Da2935A14BC7a17770292818C85b580dd; // New address of D223 on ETH mainnet.
     address public creator = msg.sender;
 
     function tokenReceived(address _from, uint256 _amount, bytes memory _data) public returns (bytes4)
