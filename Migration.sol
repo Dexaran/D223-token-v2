@@ -42,7 +42,7 @@ abstract contract IERC223 {
 contract D223Upgrading
 {
     address public d223_old = 0xcCe968120e6Ded56F32fbfe5A2Ec06CBF1e7c8ED; // Address on Ethereum mainnet.
-    address public d223_new = 0xfc12A27ED2F2faC872E679c15eFd334184D7F4F4; // New address of D223 on ETH mainnet.
+    address public d223_new = 0x0908078da2935a14bc7a17770292818c85b580dd; // New address of D223 on ETH mainnet.
     address public creator = msg.sender;
 
     function tokenReceived(address _from, uint256 _amount, bytes memory _data) public returns (bytes4)
@@ -62,14 +62,13 @@ contract D223Upgrading
         }
 
         // Store the original D223 tokens on the address of the contract permanently.
-        // These will not be extractable.
 
         return 0x8943ec02;
     }
 
-    function extract(uint256 _amount) external
+    function extract(address _token, uint256 _amount) external
     {
         require(msg.sender == creator);
-        IERC223(d223_new).transfer(creator, _amount);
+        IERC223(_token).transfer(creator, _amount);
     }
 }
